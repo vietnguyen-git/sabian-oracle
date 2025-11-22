@@ -1,0 +1,26 @@
+<SabianLayout>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    Button:
+        text: "🎲 Lắc xúc xắc"
+        font_size: 22
+        size_hint_y: None
+        height: "60dp"
+        on_release: root.roll_dice()
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        TextInput:
+            id: output_box
+            text: "🔮 Chào mừng đến với Sabian Oracle!"
+            font_size: 24
+            readonly: True
+            size_hint_y: None
+            height: self.minimum_height
+            background_color: (0, 0, 0, 1)   # nền đen
+            foreground_color: (1, 1, 1, 1)   # chữ trắng
+            cursor_color: (1, 1, 0, 1)       # con trỏ vàng
