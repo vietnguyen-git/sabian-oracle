@@ -1,26 +1,26 @@
 name: Build
-on:
-  push:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
-  build:
+  build-android:
+    name: Build for Android
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # SỬ DỤNG ACTION NÀY ĐỂ FIX LỖI
+      # Sử dụng đúng action ArtemSBulgakov và phiên bản v1.2.0
       - name: Build with Buildozer
-        uses: HeaTTheatR/buildozer-action@v1
+        uses: ArtemSBulgakov/buildozer-action@v1.2.0
         id: buildozer
         with:
-          command: buildozer android debug
+          workdir: .
           buildozer_version: stable
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: SabianOracle-APK
-          # Action này sẽ xuất file vào thư mục bin
-          path: bin/*.apk
+          # Lấy đường dẫn file APK từ output của bước buildozer phía trên
+          path: ${{ steps.buildozer.outputs.filename }}
