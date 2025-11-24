@@ -10,11 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Sử dụng đúng action ArtemSBulgakov và phiên bản v1.2.0
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1.2.0
         id: buildozer
         with:
+          user: root         # <== FIX CHÍNH
           workdir: .
           buildozer_version: stable
 
@@ -22,5 +22,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SabianOracle-APK
-          # Lấy đường dẫn file APK từ output của bước buildozer phía trên
           path: ${{ steps.buildozer.outputs.filename }}
